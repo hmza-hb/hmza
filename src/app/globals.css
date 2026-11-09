@@ -1,0 +1,51 @@
+@import "tailwindcss";
+
+:root {
+  --paper: #f3efe6;
+  --ink: #111111;
+  --void: #0a0a0a;
+  --cream: #f7f7f5;
+  --muted: #737373;
+  --gold: #c2a574;
+  --lime: #c6ee6a;
+  --lilac: #e7d2f6;
+  --nav: #f3f3f3;
+}
+
+@theme inline {
+  --color-paper: var(--paper);
+  --color-ink: var(--ink);
+  --color-void: var(--void);
+  --color-cream: var(--cream);
+  --color-muted: var(--muted);
+  --color-gold: var(--gold);
+  --color-lime: var(--lime);
+  --color-lilac: var(--lilac);
+  --color-nav: var(--nav);
+  --font-sans: var(--font-outfit);
+  --font-display: var(--font-bebas);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: #fff;
+  color: var(--ink);
+  font-family: var(--font-sans), system-ui, sans-serif;
+}
+
+::selection {
+  background: var(--lime);
+  color: var(--ink);
+}
+
+.featured-mask {
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' preserveAspectRatio='none'%3E%3Cpath fill='black' d='M6 0h88c3.3 0 6 2.7 6 6v88c0 3.3-2.7 6-6 6H54c-4 0-6-3-6-7V80c0-5-3-8-8-8H6C2.7 72 0 69.3 0 66V6C0 2.7 2.7 0 6 0z'/%3E%3C/svg%3E");
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' preserveAspectRatio='none'%3E%3Cpath fill='black' d='M6 0h88c3.3 0 6 2.7 6 6v88c0 3.3-2.7 6-6 6H54c-4 0-6-3-6-7V80c0-5-3-8-8-8H6C2.7 72 0 69.3 0 66V6C0 2.7 2.7 0 6 0z'/%3E%3C/svg%3E");
+  -webkit-mask-size: 100% 100%;
+  mask-size: 100% 100%;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+}
