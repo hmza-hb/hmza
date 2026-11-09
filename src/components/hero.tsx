@@ -128,7 +128,11 @@ export function Hero({ open }: HeroProps) {
           className="relative min-h-[240px] overflow-hidden rounded-[2rem] lg:min-h-0"
           {...(open ? fade(0.42) : { initial: { opacity: 0 } })}
         >
-          <VideoBg src="/assets/globe.mp4" />
+          <VideoBg
+            src="/assets/globe.mp4"
+            poster="/images/poster-globe.webp"
+            eager
+          />
           <div className="absolute inset-0 bg-gradient-to-b from-black/25 via-black/5 to-black/35" />
           <div className="absolute inset-x-0 top-0 z-10 p-5 text-white">
             <p className="text-[13px] text-white/90">Category . Research</p>
@@ -146,7 +150,11 @@ export function Hero({ open }: HeroProps) {
           className="relative min-h-[230px] overflow-hidden rounded-[2rem] lg:min-h-0"
           {...(open ? fade(0.48) : { initial: { opacity: 0 } })}
         >
-          <VideoBg src="/assets/lab.mp4" />
+          <VideoBg
+            src="/assets/lab.mp4"
+            poster="/images/poster-lab.webp"
+            eager
+          />
           <div className="absolute inset-0 z-[1] bg-gradient-to-t from-black/55 via-black/15 to-transparent" />
          
           <div className="absolute inset-x-0 bottom-0 z-10 p-5 text-white">

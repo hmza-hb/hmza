@@ -56,7 +56,10 @@ export function BeyondBoundaries({ open }: BeyondBoundariesProps) {
           animate={open ? { opacity: 1, y: 0 } : { opacity: 0, y: 32 }}
           transition={{ duration: 0.9, delay: 0.28, ease }}
         >
-          <VideoBg src="/assets/bg2.mp4" />
+          <VideoBg
+            src="/assets/bg2.mp4"
+            poster="/images/poster-bg2.webp"
+          />
           <div className="absolute inset-0 bg-gradient-to-t from-black/35 via-transparent to-black/10" />
           <div className="absolute inset-x-0 bottom-0 z-10 p-6 md:p-7">
             <p className="text-[12px] font-medium tracking-[0.18em] uppercase text-white/85">
