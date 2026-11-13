@@ -43,7 +43,7 @@ export function Hero({ open }: HeroProps) {
           LABS
         </motion.h1>
         <motion.a
-          href="#labs"
+          href="/join-labs"
           className="inline-flex h-12 items-center gap-2.5 rounded-full bg-nav px-5 text-[14px] font-medium text-ink transition-colors hover:bg-[#ececec]"
           {...(open ? fade(0.26) : { initial: { opacity: 0 } })}
         >
@@ -101,7 +101,7 @@ export function Hero({ open }: HeroProps) {
               Keep the notes.
             </h2>
             <p className="mt-3 max-w-[22rem] text-[13px] leading-relaxed text-ink/70">
-              Essays and logs from the work — research, product, and the
+              Essays and logs from the work: research, product, and the
               quieter craft between them.{" "}
               <a href="/writing" className="underline underline-offset-4">
                 More
@@ -124,7 +124,6 @@ export function Hero({ open }: HeroProps) {
         </motion.article>
 
         <motion.article
-          id="research"
           className="relative min-h-[240px] overflow-hidden rounded-[2rem] lg:min-h-0"
           {...(open ? fade(0.42) : { initial: { opacity: 0 } })}
         >
@@ -133,20 +132,29 @@ export function Hero({ open }: HeroProps) {
             poster="/images/poster-globe.webp"
             eager
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-black/25 via-black/5 to-black/35" />
-          <div className="absolute inset-x-0 top-0 z-10 p-5 text-white">
-            <p className="text-[13px] text-white/90">Category . Research</p>
-            <p className="text-[13px] text-white/80">Notes . 2026</p>
-          </div>
-          <div className="absolute inset-x-0 top-[42%] z-10 px-5">
-            <h2 className="font-display text-[1.7rem] leading-[0.92] tracking-[0.03em] text-white drop-shadow-sm">
-              Reading the grain of a new problem
-            </h2>
-          </div>
+          <motion.a
+            href="/research#cortex-research"
+            className="absolute inset-0 z-20"
+            aria-label="Research publications"
+          >
+            <span className="absolute inset-0 bg-gradient-to-b from-black/25 via-black/5 to-black/35" />
+            <span className="absolute inset-x-0 top-0 z-10 block p-5 text-white">
+              <span className="block text-[13px] text-white/90">
+                Category . Research
+              </span>
+              <span className="block text-[13px] text-white/80">
+                Notes . 2026
+              </span>
+            </span>
+            <span className="absolute inset-x-0 top-[42%] z-10 block px-5">
+              <span className="font-display text-[1.7rem] leading-[0.92] tracking-[0.03em] text-white drop-shadow-sm">
+                Reading the grain of a new problem
+              </span>
+            </span>
+          </motion.a>
         </motion.article>
 
         <motion.article
-          id="open-source"
           className="relative min-h-[230px] overflow-hidden rounded-[2rem] lg:min-h-0"
           {...(open ? fade(0.48) : { initial: { opacity: 0 } })}
         >
@@ -155,14 +163,21 @@ export function Hero({ open }: HeroProps) {
             poster="/images/poster-lab.webp"
             eager
           />
-          <div className="absolute inset-0 z-[1] bg-gradient-to-t from-black/55 via-black/15 to-transparent" />
-         
-          <div className="absolute inset-x-0 bottom-0 z-10 p-5 text-white">
-            <p className="text-[13px] text-white/85">Studio . 2026</p>
-            <h2 className="mt-1 font-display text-[1.45rem] leading-[0.92] tracking-[0.03em] md:text-[1.65rem]">
-              How the work actually gets done
-            </h2>
-          </div>
+          <a
+            href="/open-source"
+            className="absolute inset-0 z-20"
+            aria-label="Open source work"
+          >
+            <span className="absolute inset-0 z-[1] bg-gradient-to-t from-black/55 via-black/15 to-transparent" />
+            <span className="absolute inset-x-0 bottom-0 z-10 block p-5 text-white">
+              <span className="block text-[13px] text-white/85">
+                Studio . 2026
+              </span>
+              <span className="mt-1 block font-display text-[1.45rem] leading-[0.92] tracking-[0.03em] md:text-[1.65rem]">
+                How the work actually gets done
+              </span>
+            </span>
+          </a>
         </motion.article>
 
         <motion.article

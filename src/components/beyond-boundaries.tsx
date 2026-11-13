@@ -42,7 +42,7 @@ export function BeyondBoundaries({ open }: BeyondBoundariesProps) {
               Read writings
             </a>
             <a
-              href="#labs"
+              href="/join-labs"
               className="inline-flex h-12 items-center rounded-full bg-ink px-5 text-[14px] font-medium text-white transition-colors hover:bg-neutral-800"
             >
               Participate
