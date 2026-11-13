@@ -11,9 +11,9 @@ const panelEase = [0.22, 1, 0.36, 1] as const;
 const links = [
   { href: "#ventures", label: "Ventures" },
   { href: "#research", label: "Research" },
-  { href: "#writing", label: "Writing" },
+  { href: "/writing", label: "Writing" },
   { href: "#open-source", label: "Open source" },
-  { href: "#profile", label: "Profile" },
+  { href: "/profile", label: "Profile" },
 ];
 
 type NavbarProps = {

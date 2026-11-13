@@ -36,7 +36,7 @@ export function BeyondBoundaries({ open }: BeyondBoundariesProps) {
           </p>
           <div className="mt-10 flex flex-wrap gap-3">
             <a
-              href="#writing"
+              href="/writing"
               className="inline-flex h-12 items-center rounded-full bg-nav px-5 text-[14px] font-medium text-ink transition-colors hover:bg-[#ececec]"
             >
               Read writings

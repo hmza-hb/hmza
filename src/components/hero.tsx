@@ -13,8 +13,8 @@ const fade = (delay: number) => ({
 });
 
 const writingLinks = [
-  { href: "#writing", label: "A field guide to research sprints" },
-  { href: "#open-source", label: "Open source that earns its keep" },
+  { href: "/writing#project-cortex", label: "Project Cortex" },
+  { href: "/writing", label: "All lab writing" },
 ];
 
 const topics = [
@@ -103,7 +103,7 @@ export function Hero({ open }: HeroProps) {
             <p className="mt-3 max-w-[22rem] text-[13px] leading-relaxed text-ink/70">
               Essays and logs from the work — research, product, and the
               quieter craft between them.{" "}
-              <a href="#writing" className="underline underline-offset-4">
+              <a href="/writing" className="underline underline-offset-4">
                 More
               </a>
             </p>
