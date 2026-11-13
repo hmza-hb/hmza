@@ -100,7 +100,6 @@ export function HomeExperience() {
                 <GitHubIcon />
                 GitHub
               </a>
-             
               <a
                 href="https://linkedin.com/in/hmza-hb"
                 target="_blank"
