@@ -1,6 +1,16 @@
 import type { Metadata } from "next";
 import { Bebas_Neue, Outfit } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
+import {
+  SITE_NAME,
+  SITE_TAGLINE,
+  SITE_URL,
+  defaultDescription,
+  defaultKeywords,
+  ogImagePath,
+} from "@/data/site-seo";
+import { CrawlNav } from "@/components/crawl-nav";
+import { siteGraphJsonLd } from "@/lib/json-ld";
 import "./globals.css";
 
 const display = Bebas_Neue({
@@ -14,34 +24,25 @@ const sans = Outfit({
   variable: "--font-outfit",
 });
 
-const siteUrl = "https://hmza.cc";
-
-const title = "Engineering Beyond Boundaries";
-const description =
-  "An independent digital laboratory: publish ideas, research complex technologies, build software and hardware, run experiments, open-source releases, benchmarks, writings — and invite people to participate.";
+const ogImage = {
+  url: ogImagePath,
+  width: 1200,
+  height: 630,
+  alt: "HMZA Labs",
+};
 
 export const metadata: Metadata = {
-  metadataBase: new URL(siteUrl),
+  metadataBase: new URL(SITE_URL),
   title: {
-    default: title,
-    template: "%s | HMZA",
+    default: SITE_TAGLINE,
+    template: `%s | ${SITE_NAME}`,
   },
-  description,
-  applicationName: "HMZA",
-  authors: [{ name: "HMZA", url: siteUrl }],
-  creator: "HMZA",
-  publisher: "HMZA",
-  keywords: [
-    "HMZA",
-    "digital laboratory",
-    "engineering",
-    "research",
-    "open source",
-    "software",
-    "hardware",
-    "ventures",
-    "labs",
-  ],
+  description: defaultDescription,
+  applicationName: SITE_NAME,
+  authors: [{ name: SITE_NAME, url: SITE_URL }],
+  creator: SITE_NAME,
+  publisher: SITE_NAME,
+  keywords: [...defaultKeywords],
   robots: {
     index: true,
     follow: true,
@@ -50,38 +51,31 @@ export const metadata: Metadata = {
       follow: true,
       "max-image-preview": "large",
       "max-snippet": -1,
+      "max-video-preview": -1,
     },
   },
   alternates: {
-    canonical: siteUrl,
+    canonical: SITE_URL,
+    types: {
+      "text/plain": [{ url: "/llms.txt", title: "LLM-readable site summary" }],
+    },
   },
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: siteUrl,
-    siteName: "HMZA",
-    title,
-    description,
-    images: [
-      {
-        url: "/images/hero-bg.jpeg",
-        width: 1200,
-        height: 630,
-        alt: "HMZA Labs",
-      },
-      {
-        url: "/images/logo-hmza.png",
-        width: 6250,
-        height: 6250,
-        alt: "HMZA logo",
-      },
-    ],
+    url: SITE_URL,
+    siteName: SITE_NAME,
+    title: `${SITE_TAGLINE} | ${SITE_NAME}`,
+    description: defaultDescription,
+    images: [ogImage],
   },
   twitter: {
     card: "summary_large_image",
-    title,
-    description,
-    images: ["/images/hero-bg.jpeg"],
+    title: `${SITE_TAGLINE} | ${SITE_NAME}`,
+    description: defaultDescription,
+    images: [ogImagePath],
+    creator: "@hmza_hb",
+    site: "@hmza_hb",
   },
   icons: {
     icon: [
@@ -103,19 +97,6 @@ export const metadata: Metadata = {
   category: "technology",
 };
 
-const jsonLd = {
-  "@context": "https://schema.org",
-  "@type": "Organization",
-  name: "HMZA",
-  url: siteUrl,
-  logo: `${siteUrl}/images/logo-hmza.png`,
-  description,
-  sameAs: [
-    "https://github.com/hmza-hb",
-    "https://linkedin.com/in/hmza-hb",
-  ],
-};
-
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
@@ -125,8 +106,11 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       <body className="min-h-full bg-white font-sans text-ink">
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(siteGraphJsonLd()),
+          }}
         />
+        <CrawlNav />
         {children}
         <Analytics />
       </body>

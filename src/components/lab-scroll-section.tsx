@@ -34,7 +34,7 @@ const chapters: Chapter[] = [
     label: "02",
     tag: "Build",
     heading: "Products are the artifacts that survive",
-    body: "Ventures aren't slide decks. They're things you can click, break, and ship again — usually in public.",
+    body: "Ventures aren't slide decks. They're things you can click, break, and ship again, usually in public.",
     surface: "bg-ink text-white",
     media: "image",
     image: "/images/hero-bg.jpeg",
@@ -61,7 +61,7 @@ const chapters: Chapter[] = [
     label: "05",
     tag: "Participate",
     heading: "You can walk into the room",
-    body: "Labs isn't a funnel — it's an invitation. Join a build, critique a draft, or bring a problem worth sitting with.",
+    body: "Labs isn't a funnel. It's an invitation. Join a build, critique a draft, or bring a problem worth sitting with.",
     surface: "bg-lilac text-ink",
     media: "none",
   },
@@ -128,7 +128,7 @@ function LabScrollScene() {
             </h2>
             <p className="mt-5 max-w-md text-[16px] leading-[1.65] text-ink/80">
               A place to publish ideas, build products, run experiments, release
-              open-source software, and invite people to participate — without
+              open-source software, and invite people to participate without
               dressing it up as a corporation.
             </p>
 
@@ -235,7 +235,7 @@ function ScrollPlane({
       <PlaneMedia chapter={chapter} />
       <div className="relative z-10 p-5 md:p-6">
         <p className="font-mono text-[10px] tracking-[0.18em] opacity-65">
-          {chapter.label} — {chapter.tag}
+          {chapter.label} · {chapter.tag}
         </p>
         <p className="mt-2 font-display text-xl leading-none tracking-[0.04em] md:text-2xl">
           {chapter.heading.split(" ").slice(0, 5).join(" ")}

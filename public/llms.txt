@@ -1,0 +1,38 @@
+# HMZA Labs (hmza.cc)
+
+> Independent digital laboratory: research, open-source systems, security tooling, writings, and experiments. Founded and led by Hamza Hafeez (hmza-hb).
+
+## Canonical site
+
+https://hmza.cc
+
+## Primary navigation
+
+- Lab (home): https://hmza.cc/
+- Research: https://hmza.cc/research
+- Writing: https://hmza.cc/writing
+- Open source: https://hmza.cc/open-source
+- Profile (Hamza Hafeez): https://hmza.cc/profile
+- Contact: https://hmza.cc/contact
+- Join Labs: https://hmza.cc/join-labs
+
+## Key topics
+
+Hamza Hafeez, HMZA, HMZA Labs, distributed backend systems, application security, Cortex EDR, web crawlers, open source, Project Cortex multi-agent research, lab writings and case studies.
+
+## Contact
+
+- Email: hello@hmza.cc
+- GitHub: https://github.com/hmza-hb
+- LinkedIn: https://www.linkedin.com/in/hmza-hb
+- X: https://x.com/hmza_hb
+- Instagram: https://instagram.com/hamza.hafeez82
+
+## Crawling
+
+- Sitemap: https://hmza.cc/sitemap.xml
+- Robots: https://hmza.cc/robots.txt
+
+## Structured data
+
+JSON-LD WebSite, Organization, Person, ItemList (site navigation), and WebPage entities are embedded on hmza.cc for knowledge graphs and rich results.

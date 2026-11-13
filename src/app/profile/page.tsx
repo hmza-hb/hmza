@@ -1,15 +1,23 @@
-import type { Metadata } from "next";
 import { ProfilePage } from "@/components/profile-page";
+import { PageJsonLd } from "@/components/page-json-ld";
+import { createPageMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = {
-  title: "Hamza Hafeez",
-  description:
-    "Profile of Hamza Hafeez — builder, engineer, and home lab at hmza.cc.",
-  alternates: {
-    canonical: "/profile",
-  },
-};
+const title = "Hamza Hafeez";
+const description =
+  "Profile of Hamza Hafeez, builder, engineer, and founder of the HMZA independent digital laboratory.";
+
+export const metadata = createPageMetadata({
+  title,
+  description,
+  path: "/profile",
+  keywords: ["Hamza Hafeez profile", "hmza-hb"],
+});
 
 export default function Profile() {
-  return <ProfilePage />;
+  return (
+    <>
+      <PageJsonLd path="/profile" title={title} description={description} />
+      <ProfilePage />
+    </>
+  );
 }

@@ -1,21 +1,13 @@
 import type { MetadataRoute } from "next";
+import { sitePages } from "@/data/site-seo";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  return [
-    {
-      url: "https://hmza.cc",
-      changeFrequency: "weekly",
-      priority: 1,
-    },
-    {
-      url: "https://hmza.cc/writing",
-      changeFrequency: "weekly",
-      priority: 0.9,
-    },
-    {
-      url: "https://hmza.cc/profile",
-      changeFrequency: "monthly",
-      priority: 0.8,
-    },
-  ];
+  const updated = new Date();
+
+  return sitePages.map((page) => ({
+    url: page.path === "/" ? "https://hmza.cc" : `https://hmza.cc${page.path}`,
+    lastModified: updated,
+    changeFrequency: page.path === "/" || page.path === "/open-source" ? "weekly" : page.path === "/profile" || page.path === "/contact" ? "monthly" : "weekly",
+    priority: page.path === "/" ? 1 : page.path === "/profile" ? 0.8 : 0.9,
+  }));
 }
