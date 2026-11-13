@@ -10,6 +10,7 @@ import {
 import { Navbar } from "@/components/navbar";
 import { Hero } from "@/components/hero";
 import { BeyondBoundaries } from "@/components/beyond-boundaries";
+import { LabFeedSections } from "@/components/lab-feed-sections";
 
 const ease = [0.77, 0, 0.175, 1] as const;
 
@@ -63,6 +64,7 @@ export function HomeExperience() {
       >
         <Hero open={open} />
         <BeyondBoundaries open={open} />
+        <LabFeedSections open={open} />
 
         <footer
           id="contact"
@@ -74,8 +76,8 @@ export function HomeExperience() {
                 Start a conversation
               </p>
               <a
-                href="mailto:hello@hmza.cc"
-                className="font-display text-4xl tracking-[0.04em] text-ink md:text-5xl"
+                href="/contact"
+                className="text-[clamp(1.75rem,4vw,2.5rem)] font-normal tracking-tight text-ink transition-opacity hover:opacity-80"
               >
                 hello@hmza.cc
               </a>
@@ -100,6 +102,7 @@ export function HomeExperience() {
                 <GitHubIcon />
                 GitHub
               </a>
+
               <a
                 href="https://linkedin.com/in/hmza-hb"
                 target="_blank"
