@@ -30,7 +30,7 @@ export type WritingEntry = {
   status?: "published" | "draft";
 };
 
-export const CORTEX_CASE_STUDY_PDF = "/assets/Project Cortex case-study.pdf";
+export const CORTEX_CASE_STUDY_PDF = "/cortex-case-study.pdf";
 
 export const writings: WritingEntry[] = [
   {
