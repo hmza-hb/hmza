@@ -40,8 +40,9 @@ export function ProfilePage() {
             <h1 className="mt-3 font-display text-[clamp(2.5rem,5vw,3.5rem)] leading-none tracking-[0.02em]">
               Hamza Hafeez
             </h1>
-            <p className="mt-3 max-w-xl text-[15px] text-muted">
-              This Is Hamza Hafeez
+            <p className="mt-3 max-w-xl text-[15px] leading-relaxed text-muted">
+              Hamza Hafeez is a software engineer and founder of HMZA Labs.
+              This is the official profile page for Hamza at hmza.cc.
             </p>
           </header>
 
@@ -90,7 +91,7 @@ function ProfilePhoto() {
     <figure className="overflow-hidden rounded-[1.25rem] bg-[#f3f3f3]">
       <Image
         src="/images/hamza.jpeg"
-        alt="Hamza Hafeez"
+        alt="Hamza Hafeez, software engineer and founder of HMZA Labs"
         width={1097}
         height={1026}
         sizes="(max-width: 1024px) min(100vw - 40px, 420px), 300px"

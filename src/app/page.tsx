@@ -1,22 +1,20 @@
 import { HomeExperience } from "@/components/home-experience";
 import { PageJsonLd } from "@/components/page-json-ld";
-import { SITE_TAGLINE, defaultDescription } from "@/data/site-seo";
+import { homeDescription, homeTitle } from "@/data/site-seo";
 import { createPageMetadata } from "@/lib/metadata";
 
 export const metadata = createPageMetadata({
-  title: SITE_TAGLINE,
-  description: defaultDescription,
+  title: homeTitle,
+  description: homeDescription,
   path: "/",
+  absoluteTitle: homeTitle,
+  keywords: ["Hamza Hafeez official site", "Hamza official website"],
 });
 
 export default function Home() {
   return (
     <>
-      <PageJsonLd
-        path="/"
-        title={SITE_TAGLINE}
-        description={defaultDescription}
-      />
+      <PageJsonLd path="/" title={homeTitle} description={homeDescription} />
       <HomeExperience />
     </>
   );

@@ -1,22 +1,29 @@
 import { ProfilePage } from "@/components/profile-page";
-import { PageJsonLd } from "@/components/page-json-ld";
+import { ProfileJsonLd } from "@/components/profile-json-ld";
 import { createPageMetadata } from "@/lib/metadata";
 
 const title = "Hamza Hafeez";
 const description =
-  "Profile of Hamza Hafeez, builder, engineer, and founder of the HMZA independent digital laboratory.";
+  "Hamza Hafeez: software engineer, builder, and founder of HMZA Labs. Research, open-source security systems, distributed backends, and Project Cortex.";
 
 export const metadata = createPageMetadata({
   title,
   description,
   path: "/profile",
-  keywords: ["Hamza Hafeez profile", "hmza-hb"],
+  absoluteTitle: "Hamza Hafeez | Software engineer · HMZA Labs founder",
+  profile: true,
+  keywords: [
+    "Hamza Hafeez profile",
+    "Hamza Hafeez software engineer",
+    "Hamza developer",
+    "hmza-hb",
+  ],
 });
 
 export default function Profile() {
   return (
     <>
-      <PageJsonLd path="/profile" title={title} description={description} />
+      <ProfileJsonLd />
       <ProfilePage />
     </>
   );

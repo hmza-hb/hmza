@@ -8,6 +8,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
     url: page.path === "/" ? "https://hmza.cc" : `https://hmza.cc${page.path}`,
     lastModified: updated,
     changeFrequency: page.path === "/" || page.path === "/open-source" ? "weekly" : page.path === "/profile" || page.path === "/contact" ? "monthly" : "weekly",
-    priority: page.path === "/" ? 1 : page.path === "/profile" ? 0.8 : 0.9,
+    priority:
+      page.path === "/"
+        ? 1
+        : page.path === "/profile"
+          ? 0.95
+          : 0.9,
   }));
 }

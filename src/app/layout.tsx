@@ -3,13 +3,15 @@ import { Bebas_Neue, Outfit } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import {
   SITE_NAME,
-  SITE_TAGLINE,
   SITE_URL,
-  defaultDescription,
   defaultKeywords,
+  homeTitle,
+  homeDescription,
   ogImagePath,
+  person,
 } from "@/data/site-seo";
 import { CrawlNav } from "@/components/crawl-nav";
+import { SeoRelations } from "@/components/seo-relations";
 import { siteGraphJsonLd } from "@/lib/json-ld";
 import "./globals.css";
 
@@ -28,19 +30,19 @@ const ogImage = {
   url: ogImagePath,
   width: 1200,
   height: 630,
-  alt: "HMZA Labs",
+  alt: "Hamza Hafeez · HMZA Labs",
 };
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: SITE_TAGLINE,
+    default: homeTitle,
     template: `%s | ${SITE_NAME}`,
   },
-  description: defaultDescription,
+  description: homeDescription,
   applicationName: SITE_NAME,
-  authors: [{ name: SITE_NAME, url: SITE_URL }],
-  creator: SITE_NAME,
+  authors: [{ name: person.name, url: person.url }],
+  creator: person.name,
   publisher: SITE_NAME,
   keywords: [...defaultKeywords],
   robots: {
@@ -65,14 +67,14 @@ export const metadata: Metadata = {
     locale: "en_US",
     url: SITE_URL,
     siteName: SITE_NAME,
-    title: `${SITE_TAGLINE} | ${SITE_NAME}`,
-    description: defaultDescription,
+    title: homeTitle,
+    description: homeDescription,
     images: [ogImage],
   },
   twitter: {
     card: "summary_large_image",
-    title: `${SITE_TAGLINE} | ${SITE_NAME}`,
-    description: defaultDescription,
+    title: homeTitle,
+    description: homeDescription,
     images: [ogImagePath],
     creator: "@hmza_hb",
     site: "@hmza_hb",
@@ -103,6 +105,9 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       lang="en"
       className={`${display.variable} ${sans.variable} h-full antialiased`}
     >
+      <head>
+        <SeoRelations />
+      </head>
       <body className="min-h-full bg-white font-sans text-ink">
         <script
           type="application/ld+json"

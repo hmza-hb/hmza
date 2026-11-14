@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useEffect, useState } from "react";
 import { motion } from "motion/react";
 import {
@@ -82,7 +83,15 @@ export function HomeExperience() {
                 hello@hmza.cc
               </a>
             </div>
-            <p className="text-sm text-muted">© 2026 hmza. All rights reserved</p>
+            <p className="text-sm text-muted">
+              <Link
+                href="/profile"
+                className="text-ink transition-colors hover:underline underline-offset-4"
+              >
+                Hamza Hafeez
+              </Link>
+              {" · Labs © 2026 All Rights Reserved."}
+            </p>
           </div>
 
           <div className="mt-12 flex flex-col gap-6 border-t border-black/6 pt-8 sm:flex-row sm:items-center sm:justify-between">
