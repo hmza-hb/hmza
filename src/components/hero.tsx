@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { motion } from "motion/react";
 import { PhotoSlot } from "@/components/photo-slot";
 import { VideoBg } from "@/components/video-bg";
@@ -17,15 +18,15 @@ const writingLinks = [
   { href: "/writing", label: "All lab writing" },
 ];
 
-const topics = [
-  "Ventures",
-  "Research",
-  "Writing",
-  "Open source",
-  "Career",
-  "Labs",
-  "Systems",
-  "Design",
+const topicLinks: { label: string; href: string }[] = [
+  { label: "Ventures", href: "/#about" },
+  { label: "Research", href: "/research" },
+  { label: "Writing", href: "/writing" },
+  { label: "Open source", href: "/open-source" },
+  { label: "Career", href: "/profile" },
+  { label: "Labs", href: "/join-labs" },
+  { label: "Systems", href: "/open-source" },
+  { label: "Design", href: "/writing" },
 ];
 
 type HeroProps = {
@@ -42,22 +43,28 @@ export function Hero({ open }: HeroProps) {
         >
           LABS
         </motion.h1>
-        <motion.a
-          href="/join-labs"
-          className="inline-flex h-12 items-center gap-2.5 rounded-full bg-nav px-5 text-[14px] font-medium text-ink transition-colors hover:bg-[#ececec]"
-          {...(open ? fade(0.26) : { initial: { opacity: 0 } })}
-        >
-          Join Labs
-          <ArrowRight />
-        </motion.a>
+        <motion.div {...(open ? fade(0.26) : { initial: { opacity: 0 } })}>
+          <Link
+            href="/join-labs"
+            className="inline-flex h-12 items-center gap-2.5 rounded-full bg-nav px-5 text-[14px] font-medium text-ink transition-colors hover:bg-[#ececec]"
+          >
+            Join Labs
+            <ArrowRight />
+          </Link>
+        </motion.div>
       </div>
 
       <div className="grid grid-cols-1 gap-[18px] lg:h-[min(68vh,640px)] lg:grid-cols-[1.18fr_1fr_0.76fr] lg:grid-rows-[1.15fr_0.9fr]">
         <motion.article
           id="ventures"
-          className="relative min-h-[520px] lg:row-span-2 lg:min-h-0"
+          className="group relative min-h-[520px] lg:row-span-2 lg:min-h-0"
           {...(open ? fade(0.3) : { initial: { opacity: 0 } })}
         >
+          <Link
+            href="/#about"
+            className="absolute inset-0 z-10"
+            aria-label="Ventures and what we are"
+          />
           <div className="featured-mask absolute inset-0">
             <PhotoSlot
               src="/images/hero-bg.jpeg"
@@ -65,11 +72,11 @@ export function Hero({ open }: HeroProps) {
             />
           </div>
 
-          <div className="absolute bottom-0 left-0 z-10 w-[50%] max-w-[22rem] pb-0.5 pr-3">
+          <div className="pointer-events-none absolute bottom-0 left-0 z-[11] w-[50%] max-w-[22rem] pb-0.5 pr-3">
             <p className="text-[13px] text-muted">
               Category . Ventures &nbsp;|&nbsp; Ongoing
             </p>
-            <h2 className="mt-1 font-display text-[clamp(1.85rem,2.4vw,2.45rem)] leading-[0.92] tracking-[0.02em]">
+            <h2 className="mt-1 font-display text-[clamp(1.85rem,2.4vw,2.45rem)] leading-[0.92] tracking-[0.02em] transition-opacity group-hover:opacity-90">
               Companies and products built in public
             </h2>
           </div>
@@ -91,7 +98,13 @@ export function Hero({ open }: HeroProps) {
           <div className="relative flex h-full flex-col">
             <div className="mb-5 flex items-start justify-between gap-4">
               <p className="text-[13px] text-ink/65">Category . Writing</p>
-              <ArrowUpRight />
+              <Link
+                href="/writing"
+                className="relative z-10 flex h-10 w-10 items-center justify-center rounded-full transition-colors hover:bg-white/30"
+                aria-label="Go to writing"
+              >
+                <ArrowUpRight />
+              </Link>
             </div>
             <h2 className="max-w-[20rem] font-display text-[clamp(1.85rem,2.6vw,2.55rem)] leading-[0.9] tracking-[0.02em]">
               Build slowly.
@@ -103,20 +116,20 @@ export function Hero({ open }: HeroProps) {
             <p className="mt-3 max-w-[22rem] text-[13px] leading-relaxed text-ink/70">
               Essays and logs from the work: research, product, and the
               quieter craft between them.{" "}
-              <a href="/writing" className="underline underline-offset-4">
+              <Link href="/writing" className="underline underline-offset-4">
                 More
-              </a>
+              </Link>
             </p>
             <ul className="mt-auto pt-8">
               {writingLinks.map((item) => (
                 <li key={item.href} className="border-t border-ink/10">
-                  <a
+                  <Link
                     href={item.href}
-                    className="flex items-center justify-between gap-4 py-3 font-display text-[1.02rem] tracking-[0.04em] uppercase"
+                    className="relative z-10 flex items-center justify-between gap-4 py-3 font-display text-[1.02rem] tracking-[0.04em] uppercase"
                   >
                     {item.label}
                     <ArrowRight />
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -132,7 +145,7 @@ export function Hero({ open }: HeroProps) {
             poster="/images/poster-globe.webp"
             eager
           />
-          <motion.a
+          <Link
             href="/research#cortex-research"
             className="absolute inset-0 z-20"
             aria-label="Research publications"
@@ -151,7 +164,7 @@ export function Hero({ open }: HeroProps) {
                 Reading the grain of a new problem
               </span>
             </span>
-          </motion.a>
+          </Link>
         </motion.article>
 
         <motion.article
@@ -163,7 +176,7 @@ export function Hero({ open }: HeroProps) {
             poster="/images/poster-lab.webp"
             eager
           />
-          <a
+          <Link
             href="/open-source"
             className="absolute inset-0 z-20"
             aria-label="Open source work"
@@ -177,7 +190,7 @@ export function Hero({ open }: HeroProps) {
                 How the work actually gets done
               </span>
             </span>
-          </a>
+          </Link>
         </motion.article>
 
         <motion.article
@@ -186,24 +199,30 @@ export function Hero({ open }: HeroProps) {
           {...(open ? fade(0.54) : { initial: { opacity: 0 } })}
         >
           <div className="flex flex-wrap gap-2">
-            {topics.map((topic) => (
-              <span
-                key={topic}
-                className="rounded-full bg-[#f4ebc0] px-3.5 py-2 text-[12.5px] font-medium text-ink"
+            {topicLinks.map((topic) => (
+              <Link
+                key={topic.label}
+                href={topic.href}
+                className="rounded-full bg-[#f4ebc0] px-3.5 py-2 text-[12.5px] font-medium text-ink transition-colors hover:bg-[#ebe3b3]"
               >
-                {topic}
-              </span>
+                {topic.label}
+              </Link>
             ))}
           </div>
           <div className="mt-6 flex items-center justify-between gap-3">
-            <p className="text-[15px] font-medium">View all categories</p>
-            <a
-              href="#ventures"
-              className="flex h-11 w-11 items-center justify-center rounded-full bg-white text-ink shadow-sm"
-              aria-label="View all categories"
+            <Link
+              href="/profile"
+              className="text-[15px] font-medium hover:underline underline-offset-4"
+            >
+              View profile
+            </Link>
+            <Link
+              href="/profile"
+              className="flex h-11 w-11 items-center justify-center rounded-full bg-white text-ink shadow-sm transition-colors hover:bg-nav"
+              aria-label="View profile"
             >
               <ArrowRight />
-            </a>
+            </Link>
           </div>
         </motion.article>
       </div>
