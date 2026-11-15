@@ -1,6 +1,6 @@
 "use client";
 
-import type { FormEvent, ReactNode } from "react";
+import type { ReactNode } from "react";
 import Link from "next/link";
 import { useMemo, useState } from "react";
 import { motion } from "motion/react";
@@ -8,7 +8,6 @@ import {
   labMilestones,
   labNewsPageSize,
   labUpdates,
-  newsletterCopy,
   showLabEventsSection,
   type LabUpdate,
 } from "@/data/lab-feed";
@@ -83,8 +82,6 @@ export function LabFeedSections({ open }: LabFeedSectionsProps) {
           </div>
         </section>
       )}
-
-      <NewsletterSection open={open} />
     </>
   );
 }
@@ -248,152 +245,6 @@ function MilestoneCard({
           </Link>
         ))}
     </article>
-  );
-}
-
-function NewsletterSection({ open }: { open: boolean }) {
-  return (
-    <section
-      id="newsletter"
-      className="border-t border-black/6 bg-ink text-white"
-      aria-labelledby="newsletter-heading"
-    >
-      <div className="mx-auto w-full max-w-[1400px] px-5 py-20 md:px-8 md:py-28">
-        <div className="grid gap-12 lg:grid-cols-[1fr_minmax(280px,440px)] lg:items-end lg:gap-16">
-          <motion.div
-            initial={{ opacity: 0, y: 24 }}
-            animate={open ? { opacity: 1, y: 0 } : { opacity: 0, y: 24 }}
-            transition={{ duration: 0.75, delay: 0.1, ease }}
-          >
-            <p className="text-[12px] font-medium tracking-[0.22em] uppercase text-white/60">
-              {newsletterCopy.kicker}
-            </p>
-            <h2
-              id="newsletter-heading"
-              className="mt-4 font-display text-[clamp(2.25rem,5vw,3.25rem)] leading-[0.92] tracking-[0.02em]"
-            >
-              {newsletterCopy.title}
-            </h2>
-            <p className="mt-5 max-w-lg text-[15px] leading-[1.75] text-white/70">
-              {newsletterCopy.description}
-            </p>
-          </motion.div>
-
-          <FadeUp open={open} delay={0.2}>
-            <NewsletterForm />
-          </FadeUp>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-type FormStatus = "idle" | "loading" | "done" | "error" | "config";
-
-function NewsletterForm() {
-  const [email, setEmail] = useState("");
-  const [status, setStatus] = useState<FormStatus>("idle");
-  const [errorDetail, setErrorDetail] = useState<string | null>(null);
-
-  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-    const trimmed = email.trim();
-    if (!trimmed || !trimmed.includes("@")) {
-      setStatus("error");
-      setErrorDetail("Enter a valid email.");
-      return;
-    }
-
-    setStatus("loading");
-    setErrorDetail(null);
-
-    try {
-      const response = await fetch("/api/newsletter", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email: trimmed }),
-      });
-
-      const data = (await response.json().catch(() => ({}))) as {
-        error?: string;
-      };
-
-      if (response.ok) {
-        setStatus("done");
-        setEmail("");
-        return;
-      }
-
-      if (response.status === 503 && data.error === "not_configured") {
-        setStatus("config");
-        setErrorDetail(newsletterCopy.configMessage);
-        return;
-      }
-
-      setStatus("error");
-      setErrorDetail(newsletterCopy.errorMessage);
-    } catch {
-      setStatus("error");
-      setErrorDetail(newsletterCopy.errorMessage);
-    }
-  }
-
-  if (status === "done") {
-    return (
-      <p className="rounded-[1.25rem] border border-white/15 bg-white/10 px-6 py-5 text-[15px] leading-relaxed text-white/90">
-        {newsletterCopy.successMessage}
-      </p>
-    );
-  }
-
-  const isLoading = status === "loading";
-
-  return (
-    <form
-      onSubmit={handleSubmit}
-      className="rounded-[1.5rem] border border-white/12 bg-white/5 p-6 md:p-7"
-      noValidate
-    >
-      <label htmlFor="newsletter-email" className="sr-only">
-        Email address
-      </label>
-      <div className="flex flex-col gap-3 sm:flex-row sm:items-stretch">
-        <input
-          id="newsletter-email"
-          name="email"
-          type="email"
-          autoComplete="email"
-          required
-          disabled={isLoading}
-          placeholder="you@domain.com"
-          value={email}
-          onChange={(event) => {
-            setEmail(event.target.value);
-            if (status === "error" || status === "config") {
-              setStatus("idle");
-              setErrorDetail(null);
-            }
-          }}
-          className="h-12 min-w-0 flex-1 rounded-full border border-white/15 bg-white px-5 text-[15px] text-ink outline-none transition-shadow placeholder:text-muted focus:border-lime focus:ring-2 focus:ring-lime/40 disabled:opacity-70"
-        />
-        <button
-          type="submit"
-          disabled={isLoading}
-          className="h-12 shrink-0 rounded-full bg-lime px-6 text-[14px] font-semibold text-ink transition-colors hover:bg-[#b8e85f] disabled:cursor-wait disabled:opacity-80"
-        >
-          {isLoading ? "Subscribing…" : "Subscribe"}
-        </button>
-      </div>
-      {errorDetail && (
-        <p
-          className={`mt-3 text-[13px] leading-relaxed ${
-            status === "config" ? "text-white/65" : "text-white/85"
-          }`}
-        >
-          {errorDetail}
-        </p>
-      )}
-    </form>
   );
 }
 

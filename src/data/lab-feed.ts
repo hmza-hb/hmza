@@ -58,13 +58,3 @@ export const labMilestones: LabMilestone[] = [
 
 /** Items shown per page in Latest from the lab before "Read more". */
 export const labNewsPageSize = 5;
-
-export const newsletterCopy = {
-  kicker: "Stay in the loop",
-  title: "Join the newsletter",
-  description:
-    "Mail from the lab: releases, research drops, open sessions, and benchmarks. No spam.",
-  successMessage: "You are on the list. The next lab note will land in your inbox.",
-  errorMessage: "Could not subscribe right now. Try again or email hello@hmza.cc.",
-  configMessage: "Newsletter is not wired yet.",
-};
