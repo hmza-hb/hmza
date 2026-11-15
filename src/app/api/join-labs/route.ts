@@ -28,19 +28,11 @@ function textField(formData: FormData, key: string, maxLen: number) {
 }
 
 function resendFromAddress() {
-  return (
-    process.env.RESEND_FROM?.trim() ||
-    process.env.JOIN_LABS_FROM?.trim() ||
-    "HMZA Labs <onboarding@resend.dev>"
-  );
+  return process.env.RESEND_FROM?.trim() || "HMZA Labs <hello@hmza.cc>";
 }
 
 function adminInbox() {
-  return (
-    process.env.JOIN_LABS_ADMIN_EMAIL?.trim() ||
-    process.env.RESEND_ADMIN_EMAIL?.trim() ||
-    person.email
-  );
+  return process.env.JOIN_LABS_ADMIN_EMAIL?.trim() || person.email;
 }
 
 export async function POST(request: Request) {
@@ -69,7 +61,9 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "missing_answers" }, { status: 400 });
   }
 
-  let attachment: { filename: string; content: Buffer } | undefined;
+  let attachment:
+    | { filename: string; content: Buffer }
+    | undefined;
   const file = formData.get("attachment");
   if (file instanceof File && file.size > 0) {
     if (file.size > MAX_FILE_BYTES) {
@@ -79,10 +73,10 @@ export async function POST(request: Request) {
     if (type !== "application/octet-stream" && !ALLOWED_MIME.has(type)) {
       return NextResponse.json({ error: "file_type" }, { status: 400 });
     }
-    const bytes = Buffer.from(await file.arrayBuffer());
     attachment = {
-      filename: file.name.replace(/[^\w.\-() ]+/g, "_").slice(0, 120) || "attachment",
-      content: bytes,
+      filename:
+        file.name.replace(/[^\w.\-() ]+/g, "_").slice(0, 120) || "attachment",
+      content: Buffer.from(await file.arrayBuffer()),
     };
   }
 
@@ -97,35 +91,35 @@ export async function POST(request: Request) {
 
   const resend = new Resend(apiKey);
   const from = resendFromAddress();
-  const adminTo = adminInbox();
-
   const adminMail = adminApplicationEmail(payload);
   const applicantMail = applicantConfirmationEmail(payload);
 
-  const adminResult = await resend.emails.send({
-    from,
-    to: adminTo,
-    replyTo: email,
-    subject: adminMail.subject,
-    html: adminMail.html,
-    text: adminMail.text,
-    attachments: attachment
-      ? [{ filename: attachment.filename, content: attachment.content }]
-      : undefined,
-  });
+  const [adminResult, confirmResult] = await Promise.all([
+    resend.emails.send({
+      from,
+      to: adminInbox(),
+      replyTo: email,
+      subject: adminMail.subject,
+      html: adminMail.html,
+      text: adminMail.text,
+      attachments: attachment
+        ? [{ filename: attachment.filename, content: attachment.content }]
+        : undefined,
+    }),
+    resend.emails.send({
+      from,
+      to: email,
+      replyTo: adminInbox(),
+      subject: applicantMail.subject,
+      html: applicantMail.html,
+      text: applicantMail.text,
+    }),
+  ]);
 
   if (adminResult.error) {
     console.error("Join Labs admin email failed:", adminResult.error);
     return NextResponse.json({ error: "send_failed" }, { status: 502 });
   }
-
-  const confirmResult = await resend.emails.send({
-    from,
-    to: email,
-    subject: applicantMail.subject,
-    html: applicantMail.html,
-    text: applicantMail.text,
-  });
 
   if (confirmResult.error) {
     console.error("Join Labs confirmation email failed:", confirmResult.error);
