@@ -102,6 +102,15 @@ function PublicationCard({ pub }: { pub: (typeof publications)[number] }) {
         >
           Download
         </a>
+        {pub.related?.map((item) => (
+          <Link
+            key={item.href}
+            href={item.href}
+            className="inline-flex h-11 items-center rounded-full bg-nav px-5 text-[14px] font-medium text-ink transition-colors hover:bg-[#ececec]"
+          >
+            {item.label}
+          </Link>
+        ))}
       </div>
     </article>
   );

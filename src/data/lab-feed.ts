@@ -33,7 +33,7 @@ export const labUpdates: LabUpdate[] = [
     title: "Published Project Cortex case study",
     summary:
       "An 18-page write-up on building the security engine and agent harness.",
-    href: "/writing",
+    href: "/writing/cortex-case-study",
   },
   {
     id: "crawler-ship",

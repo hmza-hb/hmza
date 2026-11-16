@@ -93,6 +93,7 @@ export const selectedProjects: SelectedProject[] = [
       { label: "Project-Cortex", href: "https://github.com/hmza-hb/Project-Cortex" },
       { label: "PDF", href: "/project-cortex.pdf" },
       { label: "research page", href: "/research#cortex-research" },
+      { label: "case study", href: "/writing/cortex-case-study" },
     ],
   },
 ];

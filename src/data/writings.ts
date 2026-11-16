@@ -46,12 +46,14 @@ export const writings: WritingEntry[] = [
     status: "published",
   },
   {
-    id: "project-cortex",
+    id: "cortex-case-study",
     kind: "case-study",
     kicker: "Project Cortex",
-    title:
+    title: "Cortex Case Study",
+    summary:
       "What a brain-inspired security engine taught me about evidence, software reliability, and knowing when to stop.",
-    date: "2025-11-12",
+    date: "2026-11-12",
+    href: "/writing/cortex-case-study",
     pdf: CORTEX_CASE_STUDY_PDF,
     featured: true,
     status: "published",

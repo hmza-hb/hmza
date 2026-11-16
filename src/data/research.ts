@@ -9,6 +9,7 @@ export type ResearchPublication = {
   year: number;
   month?: string;
   pdf: string;
+  related?: { label: string; href: string }[];
 };
 
 export const scholarProfile = {
@@ -35,5 +36,8 @@ export const publications: ResearchPublication[] = [
     year: 2025,
     month: "November",
     pdf: CORTEX_RESEARCH_PDF,
+    related: [
+      { label: "Cortex case study", href: "/writing/cortex-case-study" },
+    ],
   },
 ];

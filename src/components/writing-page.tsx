@@ -165,33 +165,60 @@ function FeaturedCard({
               entry.kicker ? "mt-2" : "mt-4"
             }`}
           >
-            {entry.title}
+            {entry.href ? (
+              <Link href={entry.href} className="hover:text-lime">
+                {entry.title}
+              </Link>
+            ) : (
+              entry.title
+            )}
           </h2>
+          {entry.summary && (
+            <p className="mt-4 max-w-2xl text-[15px] leading-relaxed text-white/75">
+              {entry.summary}
+            </p>
+          )}
           <p className="mt-6 text-[13px] text-white/55">
             {formatDate(entry.date)}
           </p>
         </div>
 
         <div className="flex flex-col justify-end gap-4 md:items-end">
-          
-          {pdfHref && (
+          {(entry.href || pdfHref) && (
             <div className="flex w-full flex-wrap gap-3 md:justify-end">
-              <a
-                href={pdfHref}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex h-12 flex-1 items-center justify-center gap-2 rounded-full bg-lime px-5 text-[14px] font-semibold text-ink transition-colors hover:bg-[#b8e85f] md:flex-none"
-              >
-                Read PDF
-                <ArrowUpRight />
-              </a>
-              <a
-                href={pdfHref}
-                download
-                className="inline-flex h-12 flex-1 items-center justify-center rounded-full border border-white/20 px-5 text-[14px] font-medium text-white transition-colors hover:bg-white/10 md:flex-none"
-              >
-                Download
-              </a>
+              {entry.href && (
+                <Link
+                  href={entry.href}
+                  className="inline-flex h-12 flex-1 items-center justify-center gap-2 rounded-full bg-lime px-5 text-[14px] font-semibold text-ink transition-colors hover:bg-[#b8e85f] md:flex-none"
+                >
+                  Read on web
+                  <ArrowUpRight />
+                </Link>
+              )}
+              {pdfHref && (
+                <>
+                  <a
+                    href={pdfHref}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={`inline-flex h-12 flex-1 items-center justify-center gap-2 rounded-full px-5 text-[14px] font-medium transition-colors md:flex-none ${
+                      entry.href
+                        ? "border border-white/20 text-white hover:bg-white/10"
+                        : "bg-lime font-semibold text-ink hover:bg-[#b8e85f]"
+                    }`}
+                  >
+                    Read PDF
+                    {!entry.href && <ArrowUpRight />}
+                  </a>
+                  <a
+                    href={pdfHref}
+                    download
+                    className="inline-flex h-12 flex-1 items-center justify-center rounded-full border border-white/20 px-5 text-[14px] font-medium text-white transition-colors hover:bg-white/10 md:flex-none"
+                  >
+                    Download
+                  </a>
+                </>
+              )}
             </div>
           )}
         </div>
