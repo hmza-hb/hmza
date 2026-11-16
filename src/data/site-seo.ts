@@ -33,6 +33,10 @@ export const defaultKeywords = [
   "Cortex EDR",
   "backend engineering",
   "multi-agent systems",
+  "Tasty Software",
+  "taste in software",
+  "taste in coding",
+  "future of software engineers",
 ] as const;
 
 export const ogImagePath = "/images/hero-bg.jpeg";

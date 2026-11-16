@@ -1,4 +1,9 @@
 import {
+  tastySoftware,
+  tastySoftwareBody,
+  tastySoftwareSeo,
+} from "@/data/essays/tasty-software";
+import {
   SITE_NAME,
   SITE_URL,
   defaultDescription,
@@ -217,6 +222,123 @@ export function pageJsonLd({
         inLanguage: "en",
       },
       ...(breadcrumb ? [breadcrumb] : []),
+    ],
+  };
+}
+
+function essayPlainText(
+  blocks: { type: string; text?: string; items?: string[] }[],
+) {
+  return blocks
+    .map((block) => {
+      if (block.text) return block.text;
+      if (block.items) return block.items.join(" ");
+      return "";
+    })
+    .join(" ");
+}
+
+export function tastySoftwareJsonLd() {
+  const pageUrl = `${SITE_URL}${tastySoftware.path}`;
+  const pdfUrl = `${SITE_URL}${tastySoftware.pdf}`;
+  const body = essayPlainText(tastySoftwareBody);
+  const words = body.split(/\s+/).filter(Boolean).length;
+
+  return {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": ["BlogPosting", "Article"],
+        "@id": `${pageUrl}#article`,
+        mainEntityOfPage: { "@id": `${pageUrl}#webpage` },
+        url: pageUrl,
+        headline: tastySoftware.title,
+        alternativeHeadline: tastySoftware.subtitle,
+        description: tastySoftwareSeo.description,
+        abstract: tastySoftwareSeo.description,
+        articleSection: "Essay",
+        inLanguage: "en",
+        datePublished: tastySoftware.date,
+        dateModified: tastySoftware.date,
+        wordCount: words,
+        keywords: [...tastySoftwareSeo.keywords].join(", "),
+        about: tastySoftwareSeo.topics.map((name) => ({
+          "@type": "Thing",
+          name,
+        })),
+        mentions: tastySoftwareSeo.topics.map((name) => ({
+          "@type": "Thing",
+          name,
+        })),
+        author: { "@id": `${SITE_URL}/#person` },
+        creator: { "@id": `${SITE_URL}/#person` },
+        publisher: { "@id": `${SITE_URL}/#organization` },
+        image: ogImageUrl,
+        speakable: {
+          "@type": "SpeakableSpecification",
+          cssSelector: ["#essay-title", "#essay-subtitle", "#essay-abstract"],
+        },
+        encoding: {
+          "@type": "MediaObject",
+          encodingFormat: "application/pdf",
+          url: pdfUrl,
+          name: "Tasty Software PDF",
+        },
+        isAccessibleForFree: true,
+      },
+      {
+        "@type": "WebPage",
+        "@id": `${pageUrl}#webpage`,
+        url: pageUrl,
+        name: tastySoftwareSeo.title,
+        description: tastySoftwareSeo.description,
+        isPartOf: { "@id": `${SITE_URL}/#website` },
+        about: { "@id": `${pageUrl}#article` },
+        primaryImageOfPage: {
+          "@type": "ImageObject",
+          url: ogImageUrl,
+        },
+        author: { "@id": `${SITE_URL}/#person` },
+        inLanguage: "en",
+        relatedLink: [`${SITE_URL}/writing`, pdfUrl],
+      },
+      {
+        "@type": "FAQPage",
+        "@id": `${pageUrl}#faq`,
+        url: pageUrl,
+        mainEntity: tastySoftwareSeo.faqs.map((faq) => ({
+          "@type": "Question",
+          name: faq.question,
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: faq.answer,
+          },
+        })),
+      },
+      {
+        "@type": "BreadcrumbList",
+        "@id": `${pageUrl}#breadcrumb`,
+        itemListElement: [
+          {
+            "@type": "ListItem",
+            position: 1,
+            name: "Lab",
+            item: SITE_URL,
+          },
+          {
+            "@type": "ListItem",
+            position: 2,
+            name: "Writing",
+            item: `${SITE_URL}/writing`,
+          },
+          {
+            "@type": "ListItem",
+            position: 3,
+            name: tastySoftware.title,
+            item: pageUrl,
+          },
+        ],
+      },
     ],
   };
 }

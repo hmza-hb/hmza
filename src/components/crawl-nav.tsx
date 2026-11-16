@@ -14,6 +14,11 @@ export function CrawlNav() {
         <li>
           <Link href="/join-labs">Join Labs</Link>
         </li>
+        <li>
+          <Link href="/writing/tasty-software">
+            Tasty Software: taste in software and the future of software engineers
+          </Link>
+        </li>
       </ul>
     </nav>
   );

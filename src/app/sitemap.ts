@@ -22,7 +22,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     url: `https://hmza.cc${tastySoftware.path}`,
     lastModified: updated,
     changeFrequency: "monthly",
-    priority: 0.85,
+    priority: 0.96,
   });
 
   return pages;

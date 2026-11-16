@@ -10,6 +10,66 @@ export const tastySoftware = {
   pdf: tastySoftwarePdf,
 } as const;
 
+/** Search and AI-engine metadata. Essay body text is not changed. */
+export const tastySoftwareSeo = {
+  title:
+    "Taste in Software and Coding: Tasty Software | Future of Software Engineers",
+  description:
+    "Tasty Software by Hamza Hafeez: what taste in software and taste in coding actually means, why software is not dead, the future of software engineers, and how future software will be written when AI agents generate the code.",
+  keywords: [
+    "taste in software",
+    "taste in coding",
+    "what is taste in coding",
+    "what is taste in software",
+    "tasty software",
+    "future of software engineers",
+    "future of software engineering",
+    "how will software be written",
+    "future of coding",
+    "AI coding agents",
+    "is software dead",
+    "software is more alive than ever",
+    "taste coding",
+    "new software engineering",
+    "Hamza Hafeez taste",
+    "hmstack",
+  ],
+  topics: [
+    "taste in software",
+    "taste in coding",
+    "future of software engineers",
+    "AI coding agents",
+    "how future software will be written",
+  ],
+  faqs: [
+    {
+      question: "What is taste in software?",
+      answer:
+        "In software, taste is the “NO” thing that triggers.. Naah man, that’s not ready. Taste can't be a checklist. It's the thing you use when the checklist is already green and something still feels wrong.",
+    },
+    {
+      question: "What is taste in coding?",
+      answer:
+        "Taste is knowing how it should feel, how it should be built, and noticing what's off. Looking at agent-generated code that technically works and thinking nope, this will hurt us in six months.",
+    },
+    {
+      question: "What is the future of software engineers?",
+      answer:
+        "You're being promoted to chef. The job is now to decide what's worth making, to notice when it's not right yet, and to care enough to fix it. Everyone gets the same brushes now. The only thing left to compete on is what you paint.",
+    },
+    {
+      question: "How will future software be written?",
+      answer:
+        "Writing code was only a token problem. You feed in a prompt, tokens come out, and code appears. One agent writes, another agent reviews, a third agent runs the tests. What matters is what you decide to build, what you decide to cut, and whether you can tell good from almost-good.",
+    },
+    {
+      question: "Is software dead?",
+      answer:
+        "The act of typing code stopped. That's true. But software itself? SOFTWARE IS MORE ALIVE THAN EVER. There's just more of it, made faster, by more people. And when there's an ocean of software, tasty software is what stands out.",
+    },
+  ],
+} as const;
+
 export type EssayBlock =
   | { type: "p"; text: string }
   | { type: "h2"; text: string }

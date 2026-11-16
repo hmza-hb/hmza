@@ -34,6 +34,8 @@ export function createPageMetadata({
   keywords = [],
   absoluteTitle,
   profile = false,
+  article,
+  alternateTypes,
 }: {
   title: string;
   description?: string;
@@ -43,6 +45,11 @@ export function createPageMetadata({
   absoluteTitle?: string;
   /** Open Graph profile card and person image. */
   profile?: boolean;
+  article?: {
+    publishedTime: string;
+    tags?: string[];
+  };
+  alternateTypes?: NonNullable<Metadata["alternates"]>["types"];
 }): Metadata {
   const canonical = path === "/" ? SITE_URL : `${SITE_URL}${path}`;
   const fullTitle = absoluteTitle ?? `${title} | ${SITE_NAME}`;
@@ -54,8 +61,10 @@ export function createPageMetadata({
     authors: sharedAuthors,
     creator: person.name,
     publisher: SITE_NAME,
+    category: article ? "essay" : undefined,
     alternates: {
       canonical,
+      types: alternateTypes,
     },
     robots: {
       index: true,
@@ -69,7 +78,7 @@ export function createPageMetadata({
       },
     },
     openGraph: {
-      type: profile ? "profile" : "website",
+      type: profile ? "profile" : article ? "article" : "website",
       locale: "en_US",
       url: canonical,
       siteName: SITE_NAME,
@@ -81,6 +90,14 @@ export function createPageMetadata({
             firstName: person.givenName,
             lastName: person.familyName,
             username: "hmza-hb",
+          }
+        : {}),
+      ...(article
+        ? {
+            publishedTime: article.publishedTime,
+            modifiedTime: article.publishedTime,
+            authors: [person.url],
+            tags: article.tags,
           }
         : {}),
     },

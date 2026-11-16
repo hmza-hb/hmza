@@ -31,6 +31,26 @@ export default function robots(): MetadataRoute.Robots {
         userAgent: "Applebot-Extended",
         allow: "/",
       },
+      {
+        userAgent: "CCBot",
+        allow: "/",
+      },
+      {
+        userAgent: "anthropic-ai",
+        allow: "/",
+      },
+      {
+        userAgent: "cohere-ai",
+        allow: "/",
+      },
+      {
+        userAgent: "Perplexity-User",
+        allow: "/",
+      },
+      {
+        userAgent: "OAI-SearchBot",
+        allow: "/",
+      },
     ],
     sitemap: "https://hmza.cc/sitemap.xml",
     host: "https://hmza.cc",

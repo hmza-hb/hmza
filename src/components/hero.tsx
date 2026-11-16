@@ -14,6 +14,7 @@ const fade = (delay: number) => ({
 });
 
 const writingLinks = [
+  { href: "/writing/tasty-software", label: "Tasty Software" },
   { href: "/writing#project-cortex", label: "Project Cortex" },
   { href: "/writing", label: "All lab writing" },
 ];

@@ -4,13 +4,19 @@ import { createPageMetadata } from "@/lib/metadata";
 
 const title = "Writing";
 const description =
-  "Blogs, case studies, research articles, and publications from HMZA Labs, including Project Cortex.";
+  "Writing from Hamza Hafeez and HMZA Labs: Tasty Software on taste in coding, the future of software engineers, and the Project Cortex case study.";
 
 export const metadata = createPageMetadata({
   title,
   description,
   path: "/writing",
-  keywords: ["Project Cortex case study", "technical writing"],
+  keywords: [
+    "Tasty Software",
+    "taste in software",
+    "taste in coding",
+    "Project Cortex case study",
+    "technical writing",
+  ],
 });
 
 export default function Writing() {

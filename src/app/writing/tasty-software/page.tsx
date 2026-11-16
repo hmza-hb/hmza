@@ -1,26 +1,31 @@
+import { EssayJsonLd } from "@/components/essay-json-ld";
 import { EssayPage } from "@/components/essay-page";
-import { PageJsonLd } from "@/components/page-json-ld";
-import { tastySoftware } from "@/data/essays/tasty-software";
+import { tastySoftware, tastySoftwareSeo } from "@/data/essays/tasty-software";
 import { createPageMetadata } from "@/lib/metadata";
 
-const title = tastySoftware.title;
-const description = tastySoftware.subtitle;
-
 export const metadata = createPageMetadata({
-  title,
-  description,
+  title: tastySoftware.title,
+  description: tastySoftwareSeo.description,
   path: tastySoftware.path,
-  keywords: ["Tasty Software", "Hamza Hafeez essay", "taste in software"],
+  absoluteTitle: tastySoftwareSeo.title,
+  keywords: [...tastySoftwareSeo.keywords],
+  article: {
+    publishedTime: `${tastySoftware.date}T12:00:00.000Z`,
+    tags: [...tastySoftwareSeo.topics],
+  },
+  alternateTypes: {
+    "application/pdf": [{ url: tastySoftware.pdf, title: "Tasty Software PDF" }],
+    "text/markdown": [
+      { url: "/tasty-software.md", title: "Tasty Software (Markdown)" },
+    ],
+    "text/plain": [{ url: "/llms.txt", title: "LLM-readable site summary" }],
+  },
 });
 
 export default function TastySoftware() {
   return (
     <>
-      <PageJsonLd
-        path={tastySoftware.path}
-        title={title}
-        description={description}
-      />
+      <EssayJsonLd />
       <EssayPage />
     </>
   );
