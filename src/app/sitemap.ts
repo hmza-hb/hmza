@@ -1,4 +1,5 @@
 import type { MetadataRoute } from "next";
+import { cortexCaseStudy } from "@/data/essays/cortex-case-study";
 import { tastySoftware } from "@/data/essays/tasty-software";
 import { sitePages } from "@/data/site-seo";
 
@@ -18,12 +19,20 @@ export default function sitemap(): MetadataRoute.Sitemap {
       page.path === "/" ? 1 : page.path === "/profile" ? 0.95 : 0.9,
   }));
 
-  pages.push({
-    url: `https://hmza.cc${tastySoftware.path}`,
-    lastModified: updated,
-    changeFrequency: "monthly",
-    priority: 0.96,
-  });
+  pages.push(
+    {
+      url: `https://hmza.cc${tastySoftware.path}`,
+      lastModified: updated,
+      changeFrequency: "monthly",
+      priority: 0.96,
+    },
+    {
+      url: `https://hmza.cc${cortexCaseStudy.path}`,
+      lastModified: updated,
+      changeFrequency: "monthly",
+      priority: 0.97,
+    },
+  );
 
   return pages;
 }

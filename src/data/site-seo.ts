@@ -37,6 +37,10 @@ export const defaultKeywords = [
   "taste in software",
   "taste in coding",
   "future of software engineers",
+  "cortex-case-study",
+  "Cortex case study",
+  "Cortex CLI",
+  "Cortex Attack",
 ] as const;
 
 export const ogImagePath = "/images/hero-bg.jpeg";
@@ -58,6 +62,9 @@ export const person = {
     "Open-source software",
     "Multi-agent systems",
     "Project Cortex",
+    "Cortex EDR",
+    "Cortex CLI",
+    "Cortex Attack",
     "Backend engineering",
     "Web crawlers",
     "Microservices",
@@ -92,14 +99,14 @@ export const sitePages = [
     name: "Research",
     headline: "Research",
     description:
-      "Research by Hamza Hafeez and HMZA Labs, including Project Cortex and multi-agent architecture.",
+      "Research by Hamza Hafeez and HMZA Labs, including Project Cortex, the Cortex case study, and multi-agent architecture.",
   },
   {
     path: "/writing",
     name: "Writing",
     headline: "Writing",
     description:
-      "Writing and case studies from Hamza Hafeez and HMZA Labs, including Project Cortex.",
+      "Writing and case studies from Hamza Hafeez and HMZA Labs, including the Cortex case study and Tasty Software.",
   },
   {
     path: "/open-source",

@@ -3,3 +3,5 @@ Hamza Hafeez — founder, engineer — https://hmza.cc/profile
 
 /* SITE */
 https://hmza.cc
+https://hmza.cc/writing/cortex-case-study
+https://hmza.cc/writing/tasty-software

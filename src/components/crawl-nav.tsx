@@ -19,6 +19,11 @@ export function CrawlNav() {
             Tasty Software: taste in software and the future of software engineers
           </Link>
         </li>
+        <li>
+          <Link href="/writing/cortex-case-study">
+            Cortex Case Study: Project Cortex, Cortex EDR, CLI, and Attack
+          </Link>
+        </li>
       </ul>
     </nav>
   );
