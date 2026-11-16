@@ -201,10 +201,10 @@ function FeaturedCard({
 }
 
 function WritingCard({ entry }: { entry: WritingEntry }) {
-  const href = entry.pdf
-    ? encodeURI(entry.pdf)
-    : entry.href;
-  const isExternal = Boolean(entry.pdf || entry.href?.startsWith("http"));
+  const href = entry.href ?? (entry.pdf ? encodeURI(entry.pdf) : undefined);
+  const isExternal = Boolean(
+    entry.href?.startsWith("http") || (!entry.href && entry.pdf),
+  );
 
   const inner = (
     <>

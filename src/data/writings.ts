@@ -31,8 +31,20 @@ export type WritingEntry = {
 };
 
 export const CORTEX_CASE_STUDY_PDF = "/cortex-case-study.pdf";
+export const TASTY_SOFTWARE_PDF = "/tasty-software.pdf";
 
 export const writings: WritingEntry[] = [
+  {
+    id: "tasty-software",
+    kind: "blog",
+    kicker: "Essay",
+    title: "Tasty Software",
+    summary: "Why taste is the one thing the machines can't hand you",
+    date: "2026-11-16",
+    href: "/writing/tasty-software",
+    pdf: TASTY_SOFTWARE_PDF,
+    status: "published",
+  },
   {
     id: "project-cortex",
     kind: "case-study",
