@@ -1,8 +1,14 @@
 import {
+  cortexCaseStudy,
+  cortexCaseStudyBody,
+  cortexCaseStudySeo,
+} from "@/data/essays/cortex-case-study";
+import {
   tastySoftware,
   tastySoftwareBody,
   tastySoftwareSeo,
 } from "@/data/essays/tasty-software";
+import type { EssayBlock, EssayDoc, EssaySeo } from "@/data/essays/types";
 import {
   SITE_NAME,
   SITE_URL,
@@ -226,47 +232,80 @@ export function pageJsonLd({
   };
 }
 
-function essayPlainText(
-  blocks: { type: string; text?: string; items?: string[] }[],
-) {
+function essayPlainText(blocks: EssayBlock[]) {
   return blocks
     .map((block) => {
-      if (block.text) return block.text;
-      if (block.items) return block.items.join(" ");
-      return "";
+      switch (block.type) {
+        case "p":
+        case "h2":
+        case "h3":
+        case "aside":
+          return block.text;
+        case "quote":
+          return [block.text, block.attribution].filter(Boolean).join(" ");
+        case "ul":
+        case "ol":
+          return block.items.join(" ");
+        case "facts":
+          return block.items
+            .map((item) => `${item.label} ${item.value}`)
+            .join(" ");
+        case "table":
+          return [
+            block.headers.join(" "),
+            ...block.rows.map((row) => row.join(" ")),
+          ].join(" ");
+        default:
+          return "";
+      }
     })
     .join(" ");
 }
 
-export function tastySoftwareJsonLd() {
-  const pageUrl = `${SITE_URL}${tastySoftware.path}`;
-  const pdfUrl = `${SITE_URL}${tastySoftware.pdf}`;
-  const body = essayPlainText(tastySoftwareBody);
-  const words = body.split(/\s+/).filter(Boolean).length;
+function writingPieceJsonLd({
+  doc,
+  seo,
+  body,
+  section,
+  pdfName,
+  relatedLink,
+}: {
+  doc: EssayDoc;
+  seo: EssaySeo;
+  body: EssayBlock[];
+  section: string;
+  pdfName: string;
+  relatedLink?: string[];
+}) {
+  const pageUrl = `${SITE_URL}${doc.path}`;
+  const pdfUrl = `${SITE_URL}${doc.pdf}`;
+  const mdUrl = `${SITE_URL}${doc.md}`;
+  const plain = essayPlainText(body);
+  const words = plain.split(/\s+/).filter(Boolean).length;
 
   return {
     "@context": "https://schema.org",
     "@graph": [
       {
-        "@type": ["BlogPosting", "Article"],
+        "@type": ["BlogPosting", "Article", "TechArticle"],
         "@id": `${pageUrl}#article`,
         mainEntityOfPage: { "@id": `${pageUrl}#webpage` },
         url: pageUrl,
-        headline: tastySoftware.title,
-        alternativeHeadline: tastySoftware.subtitle,
-        description: tastySoftwareSeo.description,
-        abstract: tastySoftwareSeo.description,
-        articleSection: "Essay",
+        headline: doc.title,
+        alternativeHeadline: doc.subtitle,
+        description: seo.description,
+        abstract: seo.description,
+        articleSection: section,
         inLanguage: "en",
-        datePublished: tastySoftware.date,
-        dateModified: tastySoftware.date,
+        datePublished: doc.date,
+        dateModified: doc.date,
         wordCount: words,
-        keywords: [...tastySoftwareSeo.keywords].join(", "),
-        about: tastySoftwareSeo.topics.map((name) => ({
+        keywords: [...seo.keywords].join(", "),
+        about: seo.topics.map((name) => ({
           "@type": "Thing",
           name,
         })),
-        mentions: tastySoftwareSeo.topics.map((name) => ({
+        mentions: seo.topics.map((name) => ({
           "@type": "Thing",
           name,
         })),
@@ -278,20 +317,28 @@ export function tastySoftwareJsonLd() {
           "@type": "SpeakableSpecification",
           cssSelector: ["#essay-title", "#essay-subtitle", "#essay-abstract"],
         },
-        encoding: {
-          "@type": "MediaObject",
-          encodingFormat: "application/pdf",
-          url: pdfUrl,
-          name: "Tasty Software PDF",
-        },
+        encoding: [
+          {
+            "@type": "MediaObject",
+            encodingFormat: "application/pdf",
+            url: pdfUrl,
+            name: pdfName,
+          },
+          {
+            "@type": "MediaObject",
+            encodingFormat: "text/markdown",
+            url: mdUrl,
+            name: `${doc.title} (Markdown)`,
+          },
+        ],
         isAccessibleForFree: true,
       },
       {
         "@type": "WebPage",
         "@id": `${pageUrl}#webpage`,
         url: pageUrl,
-        name: tastySoftwareSeo.title,
-        description: tastySoftwareSeo.description,
+        name: seo.title,
+        description: seo.description,
         isPartOf: { "@id": `${SITE_URL}/#website` },
         about: { "@id": `${pageUrl}#article` },
         primaryImageOfPage: {
@@ -300,13 +347,18 @@ export function tastySoftwareJsonLd() {
         },
         author: { "@id": `${SITE_URL}/#person` },
         inLanguage: "en",
-        relatedLink: [`${SITE_URL}/writing`, pdfUrl],
+        relatedLink: [
+          `${SITE_URL}/writing`,
+          pdfUrl,
+          mdUrl,
+          ...(relatedLink ?? []),
+        ],
       },
       {
         "@type": "FAQPage",
         "@id": `${pageUrl}#faq`,
         url: pageUrl,
-        mainEntity: tastySoftwareSeo.faqs.map((faq) => ({
+        mainEntity: seo.faqs.map((faq) => ({
           "@type": "Question",
           name: faq.question,
           acceptedAnswer: {
@@ -334,11 +386,36 @@ export function tastySoftwareJsonLd() {
           {
             "@type": "ListItem",
             position: 3,
-            name: tastySoftware.title,
+            name: doc.title,
             item: pageUrl,
           },
         ],
       },
     ],
   };
+}
+
+export function tastySoftwareJsonLd() {
+  return writingPieceJsonLd({
+    doc: tastySoftware,
+    seo: tastySoftwareSeo,
+    body: tastySoftwareBody,
+    section: "Essay",
+    pdfName: "Tasty Software PDF",
+  });
+}
+
+export function cortexCaseStudyJsonLd() {
+  return writingPieceJsonLd({
+    doc: cortexCaseStudy,
+    seo: cortexCaseStudySeo,
+    body: cortexCaseStudyBody,
+    section: "Case study",
+    pdfName: "Cortex Case Study PDF",
+    relatedLink: [
+      `${SITE_URL}/research`,
+      `${SITE_URL}/project-cortex.pdf`,
+      `${SITE_URL}/open-source`,
+    ],
+  });
 }

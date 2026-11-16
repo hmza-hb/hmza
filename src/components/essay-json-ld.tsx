@@ -1,11 +1,9 @@
-import { tastySoftwareJsonLd } from "@/lib/json-ld";
-
-export function EssayJsonLd() {
+export function EssayJsonLd({ graph }: { graph: unknown }) {
   return (
     <script
       type="application/ld+json"
       dangerouslySetInnerHTML={{
-        __html: JSON.stringify(tastySoftwareJsonLd()),
+        __html: JSON.stringify(graph),
       }}
     />
   );

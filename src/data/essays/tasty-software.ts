@@ -1,3 +1,7 @@
+import type { EssayBlock } from "./types";
+
+export type { EssayBlock } from "./types";
+
 export const tastySoftwarePdf = "/tasty-software.pdf";
 
 export const tastySoftware = {
@@ -8,6 +12,7 @@ export const tastySoftware = {
   byline: "By Hamza Hafeez @hmza.cc",
   date: "2026-11-16",
   pdf: tastySoftwarePdf,
+  md: "/tasty-software.md",
 } as const;
 
 /** Search and AI-engine metadata. Essay body text is not changed. */
@@ -69,13 +74,6 @@ export const tastySoftwareSeo = {
     },
   ],
 } as const;
-
-export type EssayBlock =
-  | { type: "p"; text: string }
-  | { type: "h2"; text: string }
-  | { type: "quote"; text: string }
-  | { type: "ul"; items: string[] }
-  | { type: "ol"; items: string[]; start?: number };
 
 export const tastySoftwareBody: EssayBlock[] = [
   {
