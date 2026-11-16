@@ -20,6 +20,14 @@ export type LabMilestone = {
 /** Edit this list to publish lab news on the home page. */
 export const labUpdates: LabUpdate[] = [
   {
+    id: "tasty-software",
+    date: "2026-11-16",
+    title: "New essay: Tasty Software",
+    summary:
+      "Why taste is the one thing the machines can't hand you. Read it on the lab, or download the PDF.",
+    href: "/writing/tasty-software",
+  },
+  {
     id: "cortex-case-study",
     date: "2026-11-12",
     title: "Published Project Cortex case study",
